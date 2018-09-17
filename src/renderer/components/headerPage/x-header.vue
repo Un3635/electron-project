@@ -50,7 +50,7 @@ export default Vue.extend({
 .x-header-wrap {
   width: 100%;
   height: 40px;
-  background: #000;
+  background: rgba(0,0,0,1);
   .x-header-con {
     position: relative;
     float: right;

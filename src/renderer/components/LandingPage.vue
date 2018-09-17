@@ -1,9 +1,8 @@
 <template>
-  <div id="wrapper">
+  <div id="wrapper" :class="skins">
     <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
     <main>
       <div class="main-wrap">
-       
       </div>
     </main>
   </div>
@@ -14,6 +13,12 @@
   export default {
     name: 'landing-page',
     components: { SystemInformation },
+    data() {
+      return {
+        skinsArr: ['skin0', 'skin1'],
+        skins: 'skin0'
+      }
+    },
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)
@@ -24,7 +29,7 @@
 
 <style>
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
+  @import url('../assets/scss/skin/skin0.scss');
   * {
     box-sizing: border-box;
     margin: 0;
@@ -34,14 +39,8 @@
   body { font-family: 'Source Sans Pro', sans-serif; }
 
   #wrapper {
-    background:
-      radial-gradient(
-        ellipse at top left,
-        rgba(255, 255, 255, 1) 40%,
-        rgba(229, 229, 229, .9) 100%
-      );
     height: 100vh;
-    padding: 60px 80px;
+    /* padding: 60px 80px; */
     width: 100vw;
   }
 
