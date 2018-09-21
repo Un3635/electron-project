@@ -48,9 +48,11 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .x-header-wrap {
+  position: absolute;
   width: 100%;
   height: 40px;
-  background: rgba(0,0,0,1);
+  z-index: 99;
+  // background: rgba(0,0,0,1);
   .x-header-con {
     position: relative;
     float: right;

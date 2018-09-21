@@ -1,8 +1,14 @@
 <template>
+  <!-- <div id="container">
+   <div id="leafContainer">
+     
+   </div>
+   
+  </div> -->
   <div id="app">
-    <x-header></x-header>
-    <router-view></router-view>
-  </div>
+      <x-header></x-header>
+      <router-view></router-view>
+   </div>
 </template>
 
 <script>
@@ -17,5 +23,9 @@
 </script>
 
 <style>
+#app {
+  position: absolute;
+  z-index: 9;
+}
   /* CSS */
 </style>

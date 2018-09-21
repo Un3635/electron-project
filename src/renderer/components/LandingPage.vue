@@ -1,8 +1,9 @@
 <template>
-  <div id="wrapper" :class="skins">
+  <div id="wrapper">
     <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
     <main>
       <div class="main-wrap">
+        <x-main></x-main>
       </div>
     </main>
   </div>
@@ -10,9 +11,10 @@
 
 <script>
   import SystemInformation from './LandingPage/SystemInformation'
+  import XMain from './mainPage/main'
   export default {
     name: 'landing-page',
-    components: { SystemInformation },
+    components: { SystemInformation, XMain},
     data() {
       return {
         skinsArr: ['skin0', 'skin1'],

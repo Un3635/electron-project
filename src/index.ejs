@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>electron-project</title>
+    <link rel="stylesheet" href="/static/css/leaves.css">
     <% if (htmlWebpackPlugin.options.nodeModules) { %>
       <!-- Add `node_modules/` to global paths so `require` works properly in development -->
       <script>
@@ -10,8 +11,18 @@
       </script>
     <% } %>
   </head>
+  <style>
+    body, html {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
   <body>
-    <div id="app"></div>
+   <div id="container">
+      <div id="leafContainer"></div>
+      <div id="app"></div>
+   </div>
     <!-- Set `__static` path to static files in production -->
     <script>
       if (process.env.NODE_ENV !== 'development') window.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
@@ -19,6 +30,7 @@
 
     <!-- webpack builds are automatically injected -->
   </body>
+  <script src="/static/js/leaves.js"></script>
   <script>
   window.onload = function() {
     console.log(1);

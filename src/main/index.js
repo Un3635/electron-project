@@ -18,10 +18,10 @@ function createWindow () {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    height: 563,
+    height: 763,
     frame: false, // 去掉默认菜单
     useContentSize: true,
-    width: 1000
+    width: 1500
   })
 
   // 或者去掉默认菜单 
