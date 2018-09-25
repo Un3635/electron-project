@@ -7,7 +7,7 @@
 
 /* eslint-disable */
 // 医用API
-require('./api')
+// require('./api')
 
 // Install `electron-debug` with `devtron`
 require('electron-debug')({ showDevTools: true })
@@ -23,6 +23,7 @@ require('electron').app.on('ready', () => {
 })
 
 
+require('../api/api')
 // Require `main` process to boot app
 require('./index')
 

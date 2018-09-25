@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "zhuhl3635 <zhuhl3635@163.com>",
   "description": "An electron-vue project",
-  "license": null,
+  "license": "ISC",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
@@ -52,7 +52,9 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "font-awesome": "^4.7.0",
+    "bip39": "^2.5.0",
+    "bitcoinjs-lib": "^3.3.2",
+    "iview": "^3.1.2",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",
     "vue-router": "^3.0.1",
@@ -67,6 +69,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "babili-webpack-plugin": "^0.1.2",
+    "body-parser": "^1.18.3",
     "cfonts": "^2.1.2",
     "chalk": "^2.4.1",
     "copy-webpack-plugin": "^4.5.1",
@@ -75,12 +78,14 @@
     "del": "^3.0.0",
     "devtron": "^1.4.0",
     "electron": "^2.0.4",
+    "electron-builder": "^20.19.2",
     "electron-debug": "^1.5.0",
     "electron-devtools-installer": "^2.2.4",
-    "electron-builder": "^20.19.2",
-    "mini-css-extract-plugin": "0.4.0",
+    "express": "^4.16.3",
     "file-loader": "^1.1.11",
+    "font-awesome": "^4.7.0",
     "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "0.4.0",
     "multispinner": "^0.2.1",
     "node-loader": "^0.6.0",
     "node-sass": "^4.9.2",
@@ -91,10 +96,18 @@
     "vue-loader": "^15.2.4",
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
-    "webpack-cli": "^3.0.8",
     "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.4",
     "webpack-hot-middleware": "^2.22.2",
     "webpack-merge": "^4.1.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Un3635/electron-project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Un3635/electron-project/issues"
+  },
+  "homepage": "https://github.com/Un3635/electron-project#readme"
 }

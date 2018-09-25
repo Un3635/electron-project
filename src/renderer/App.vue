@@ -12,12 +12,12 @@
 </template>
 
 <script>
-  import XHeader from './components/headerPage/x-header'
+  import XHeader from './components/headerPage/x-header';
 
   export default {
     name: 'electron-project',
     components: {
-     XHeader 
+     XHeader
     }
   }
 </script>

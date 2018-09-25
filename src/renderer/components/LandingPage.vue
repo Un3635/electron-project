@@ -1,11 +1,12 @@
 <template>
-  <div id="wrapper">
+  <div id="wrapper" @click="show = !show">
     <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
-    <main>
-      <div class="main-wrap">
+    <transition name="mainTran">
+      <main v-show="show" class="main-box">
         <x-main></x-main>
-      </div>
-    </main>
+      </main>
+    </transition>
+   
   </div>
 </template>
 
@@ -18,7 +19,8 @@
     data() {
       return {
         skinsArr: ['skin0', 'skin1'],
-        skins: 'skin0'
+        skins: 'skin0',
+        show: false
       }
     },
     methods: {
@@ -51,6 +53,20 @@
     margin-bottom: 20px;
     width: 420px;
   }
-
+  .main-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+  }
+  .mainTran-enter-active, .mainTran-leave-active {
+    /* opacity: 1; */
+    top: 0px;
+    transition: all .5s linear;  
+  }
+  .mainTran-enter, .mainTran-leave-to {
+    /* opacity: 0; */
+    top: -1000px;
+  }
   
 </style>

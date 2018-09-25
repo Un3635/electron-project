@@ -2,9 +2,9 @@
   <transition name="sideTran">
     <div class="side-wrap" v-if="showTag">
       <div class="list-group">
-        <a class="list-group-item" href="#"><i class="fa fa-user-o fa-fw"></i>&nbsp; 个人中心</a>
-        <a class="list-group-item" href="#"><i class="fa fa-bell fa-fw"></i>&nbsp; 消息</a>
-        <a class="list-group-item" href="#"><i class="fa fa-cog fa-fw"></i>&nbsp; Settings</a>
+        <a class="list-group-item" href="#"><i class="fa fa-user-o fa-fw logo"></i>&nbsp; 个人中心</a>
+        <a class="list-group-item" href="#"><i class="fa fa-bell fa-fw logo"></i>&nbsp; 消息</a>
+        <a class="list-group-item" href="#"><i class="fa fa-cog fa-fw logo"></i>&nbsp; Settings</a>
       </div>
     </div>
   </transition>
@@ -19,7 +19,7 @@ export default Vue.extend({
     }
   },
   created() {
-    console.log('addddas');
+    // console.log('addddas');
   }
 })
 </script>
@@ -28,12 +28,15 @@ export default Vue.extend({
     position: absolute;
     right: 0px;
     top: 40px;
-    width: 100px;
-    height: 100%;
-    background: rgba(0,0,0,.9);
+    width: 79px;
+    height: 100vh;
+    // background: rgba(0,0,0,.5);
     color: #ffffff;
     font-size: 13px;
     z-index: 9;
+    .logo {
+      margin-right: -5px
+    }
     .list-group-item {
       display: block;
       color: #ffffff;

@@ -4,7 +4,9 @@
      <i class="fa fa-window-minimize" @click="windowFn().minimize()"></i>
      <i class="fa fa-window-maximize" @click="windowFn().maximize()"></i>
      <i class="fa fa-cog" @click="showTag = !showTag"></i>
+     <!-- <i class="fa fa-cog" @click="windowFn().setting()"></i> -->
     </div>
+    <!-- <x-side></x-side> -->
     <x-side :showTag="showTag"></x-side>
   </div>
 </template>
@@ -33,6 +35,7 @@ export default Vue.extend({
           ipc.send('window-max');
         },
         setting() {
+          console.log('123');
           // this.showTag = !this.showTag;
           // this.show = !this.show;
           // console.log(this.show);
