@@ -1,18 +1,18 @@
 <template>
-  <div id="wrapper" @click="show = !show">
+  <div id="wrapper" @click="showFn">
     <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
     <transition name="mainTran">
-      <main v-show="show" class="main-box">
+      <main v-show="showMain" class="main-box">
         <x-main></x-main>
       </main>
     </transition>
-   
   </div>
 </template>
 
 <script>
   import SystemInformation from './LandingPage/SystemInformation'
   import XMain from './mainPage/main'
+  
   export default {
     name: 'landing-page',
     components: { SystemInformation, XMain},
@@ -20,12 +20,21 @@
       return {
         skinsArr: ['skin0', 'skin1'],
         skins: 'skin0',
-        show: false
+        showT: false
+      }
+    },
+    computed: {
+      showMain() {
+        this.showT = this.$store.state.Counter.showMain
+        return this.showT;
       }
     },
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)
+      },
+      showFn() {
+         this.$store.commit('showMain', this.showT);
       }
     }
   }

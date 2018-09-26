@@ -1,5 +1,6 @@
 const state = {
-  main: 0
+  main: 0,
+  showMain: false
 }
 
 const mutations = {
@@ -8,6 +9,9 @@ const mutations = {
   },
   INCREMENT_MAIN_COUNTER (state) {
     state.main++
+  },
+  showMain(T) {
+    state.showMain = T;
   }
 }
 

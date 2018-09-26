@@ -46,6 +46,12 @@ router.post('/mnemonic', (req, res, next) => {
   next();
 })
 
+// 表单下载
+router.post('/doLoad', (req, res, next) => {
+  console.log(req.body)
+  next();
+})
+
 api.use('/', router);
 api.listen(3000, function() {
   console.log(3000, 'port success');

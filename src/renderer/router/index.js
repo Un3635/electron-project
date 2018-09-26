@@ -13,6 +13,16 @@ export default new Router({
     {
       path: '*',
       redirect: '/'
+    },
+    {
+      path: '/main',
+      name: 'main',
+      component: require('@/components/mainPage/main').default
+    },
+    {
+      path: '/walletDetail',
+      name: 'wallet-detail',
+      component: require('@/components/mainPage/wallet-detail').default
     }
   ]
 })
