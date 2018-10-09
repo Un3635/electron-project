@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-  import APIS from '../../api/api.js';
+  import theadCus from '../../api/index.js';
   import saveAs from '../../../static/fileSaver.js';
 
   export default {
@@ -79,9 +79,15 @@
         this.listData[this.coin] = [];
         this.ETHcircleCount = -99;
         this.change();
+                var circleCount = Math.floor(parseInt(this.num)/parseInt(this.count));
+                console.log(circleCount);
+      this.spinShow = true;
+       var res = theadCus(circleCount);
+       console.log(res);
+       this.num = res.length;
        
-        if(T !== 'change')
-          this.getMnemonic();
+        // if(T !== 'change')
+        //  this.getMnemonic();
       },
       getMnemonicEth(res) {
         // this.listD
