@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-  import APIS from '../services/bitcoin-api.js';
+  import APIS from '../../api/api.js';
   import saveAs from '../../../static/fileSaver.js';
 
   export default {
@@ -111,18 +111,14 @@
             this.$Loading.start();
             this.spinShow = true;
           }
-          APIS.getMnemonic(this.coin).then(
-            (res) => {
-              if(this.coin === 'BTC') {
-                this.getMnemonicBtc(res);
-              } else if(this.coin === 'ETH') {
-                if(this.ETHcircleCount === -99) this.ETHcircleCount = this.num;
-                this.getMnemonicEth(res, this.ETHcircleCount);
-              }
-            
-            }
-          )
-         
+          var res = APIS.getMnemonic(this.coin);
+          // console.log(res);
+          if(this.coin === 'BTC') {
+            this.getMnemonicBtc(res);
+          } else if(this.coin === 'ETH') {
+            if(this.ETHcircleCount === -99) this.ETHcircleCount = this.num;
+            this.getMnemonicEth(res, this.ETHcircleCount);
+          }
           
         } else {
           this.$Notice.error({
@@ -189,21 +185,17 @@
         
       },
       getAddress(sc, ec, cb) {
-         APIS.generate(this.coin, sc, ec).then(
-          (res) => {
-            
-            if( this.coin === 'BTC') {
-              this.listData[this.coin] = this.listData[this.coin].concat(res.data.result[this.coin]);
-            } else {
-              var arr = this.listData[this.coin][this.listData[this.coin].length-1];
-              this.listData[this.coin][this.listData[this.coin].length-1] = Object.assign(arr, res.data.result[this.coin][0])
-            }
-            this.percent = Math.floor(this.listData[this.coin].length / this.num * 100);
-           
-          }
-        ).then(() => {
-          cb && cb();
-        })
+        var res = APIS.generate(this.coin, sc, ec);
+        // console.log(res);
+        if( this.coin === 'BTC') {
+          this.listData[this.coin] = this.listData[this.coin].concat(res[this.coin]);
+        } else {
+          var arr = this.listData[this.coin][this.listData[this.coin].length-1];
+          this.listData[this.coin][this.listData[this.coin].length-1] = Object.assign(arr, res[this.coin][0])
+        }
+        this.percent = Math.floor(this.listData[this.coin].length / this.num * 100);
+        // console.log(this.percent)
+        cb && cb();
       },
       doLoad() {
         // var mes = '助记词: ' + this.listData.mnemonic + '\r\n';
