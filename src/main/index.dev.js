@@ -20,6 +20,5 @@ require('electron').app.on('ready', () => {
     })
 })
 
-require('../api/api')
 // Require `main` process to boot app
 require('./index')
