@@ -1,0 +1,23 @@
+{
+  "name": "xtoken2.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "dev": "node ./api/index.js",
+    "packager": "electron-packager ../Xtoken2.0 --all --out ./xtoken --electron-version 1.0.0 --overwrite "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bip39": "^2.5.0",
+    "bitcoinjs-lib": "^3.3.2",
+    "ethereumjs-util": "^6.0.0",
+    "ethereumjs-wallet": "^0.6.2"
+  },
+  "devDependencies": {
+    "electron": "^3.0.3"
+  }
+}
