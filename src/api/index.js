@@ -1,31 +1,27 @@
-const fs = require('fs');
-const child_process = require('child_process');
-
 const path = require('path');
-// const apis = require('./api.js');
+var child_process = require('child_process');
+
 var arr = [];
 
-console.log(__dirname);
-const theadCus = (circle = 1) => {
+const theadCus = (circle = 1, cb) => {
   const __path = path.join(__dirname, 'api.js');
-  console.log(__path);
-  console.log('circle', circle);
-  for(var i=0; i< circle; i++) {
-    var workerProcess = child_process.exec('node '+__path, function (error, stdout, stderr) {
-        if (error) {
-            console.log(error.stack);
-            console.log('Error code: '+error.code);
-            console.log('Signal received: '+error.signal);
-        }
-        // console.log(typeof stdout);
-        arr.push(stdout)
-        // console.log('stderr: ' + stderr);
-    });
+  // console.log(__path);
+  for(var i=0; i< 1; i++) {
+		var workerProcess = child_process.spawn('node', [__path, i, 'btc']);
+		workerProcess.stdout.on('data', function (data) {
+			// console.log(typeof data);
+			console.log('stdout: ' + data);
+			arr.push(data+'');
+   	});
  
-    workerProcess.on('exit', function (code) {
-        // console.log('子进程已退出，退出码 '+code);
-    });
-}
-return arr;
+		workerProcess.stderr.on('data', function (data) {
+				console.log('stderr: ' + data);
+		});
+
+		workerProcess.on('close', function (code) {
+			console.log('子进程已退出，退出码 ' + code);
+			 cb && cb(arr);
+		});
+	}
 }
 module.exports = theadCus;
