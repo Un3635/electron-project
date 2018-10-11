@@ -4,9 +4,17 @@ const url = require('url')
 const electron = require('electron')
 const ipc = electron.ipcMain
 
+// 添加flash插件
+app.commandLine.appendSwitch('ppapi-flash-path', app.getPath('pepperFlashSystemPlugin'))
+  
+// 可选：指定 flash 的版本
+app.commandLine.appendSwitch('ppapi-flash-version', '30.0.0.113') 
 
+// 保持一个对于 window 对象的全局引用，如果你不这样做，
+// 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
 let win
 
+let template = []
 
 function createWindow () {
 

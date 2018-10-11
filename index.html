@@ -4,49 +4,75 @@
     <meta charset="UTF-8">
     <title>XTOKEN2.O</title>
     <!-- <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css"> -->
-    <link rel="stylesheet" href="asset/css/head.css">
-    <link rel="stylesheet" href="asset/css/style.css">
+    <!-- <link rel="stylesheet" href="asset/css/head.css">
+    <link rel="stylesheet" href="asset/css/style.css"> -->
   </head>
   <body>
       <div style="-webkit-app-region: drag;width: 100%; height: 40px; position: absolute;"></div>
-      <div class="x-header-wrap">
-          <div class="x-header-con">
-            <Icon type="ios-remove" class="iconCus" @click="windowFn().minimize()"/>
-            <!-- <Icon type="ios-expand" class="iconCus" @click="windowFn().maximize()"/> -->
-            <Icon type="ios-power-outline" class="iconCus" @click="windowFn().closed()"/>
-          </div>
-        </div>
       <div id="wrapper">
           <h2 class="title">XTOKEN.2</h2>
-          <div style="height: 40px">
-              <Input v-model="num" height="40px" @on-change="change" @on-enter="sure">
-                <Select v-model="coin" slot="prepend" style="width: 80px" >
-                  <Option v-for="c in allCoin" :key="c.index" :value="c.name">{{c.name}}</Option>
-                </Select>
-                <!-- <span slot="prepend">{{coin}}</span> -->
-                <span slot="append" onclick="sure">确定</span>
-              </Input>
-          </div>
-          <div class="content">
-            <p  style="margin-bottom: 10px; font-size: 15px; padding: 0px 25px">点击保存,将生成BTC文件</p>
-            <p  >请在输入框中输入您想生成的地址数量</p>
-            <!-- <p v-if="spinShow && !opShow" >正则生成，请稍等...</p> -->
-            <Button  size="large" type="dashed" @click="doLoad" style="display:block; margin:auto">保存</Button>
-            <div class="loading" > 
-              <!--  v-show="spinShow && !opShow" -->
-                <!-- <Spin size="large" fix ></Spin> -->
-              <Progress style="width: 220px" :percent="percent" status="active" :stroke-width="8"/>
-              <p style="font-size: 16px;"> 正在生成，请稍等... </p>
-           </div>
-           <p class="hint">私钥私密, 确保周围环境的安全</p>
+          <button id="btn">点击</button>
+          <div id="test">测试</div>
+          <div id="content">内容</div>
            <!-- <div ref="loading" v-show="spinShow" class="loading">
              生成中
            </div> -->
           </div>
         </div>
         <!-- <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script> -->
-        <script src="lib/jquery-1.9.1.min.js"></script>
-        <script src="api/index.js"></script>
+        <script src="plugin/jquery-1.9.1.min.js"></script>
         <script src="index.js"></script>
+        <script>
+          var path = require('path');
+          var child_process = require('child_process');
+          function theadCus() {
+            var __res = '';
+            var __path = path.join(__dirname, 'child/test.js');
+            console.log(__path);
+            for(var i=0; i< 1; i++) {
+              
+                // var workerProcess = child_process.spawn('node', [__path, i, 'btc']);
+                // var workerProcess = child_process.exec('node', [__path, i]);
+                // var workerProcess = child_process.fork(__path, {
+                // 	silent: false
+                // });
+                var child = child_process.fork(__path, [i], {
+                  silent: true
+                });
+                //   child.on('message', function(m){
+                //     // console.log('message from child: ' + JSON.stringify(m));
+                //     __res += 'child';
+                //     // cb && cb(__res);
+                // });
+                
+                // child.send({from: 'parent'});
+                child.stdout.setEncoding('utf8');
+                child.stdout.on('data', function (data) {
+                  // console.log(typeof data);
+                  console.log('stdout: ' + data);
+                  // alert(data+'')
+                  __res += 'success122';
+                  // cb && cb(__res);
+                  // arr.push(data+'');
+                });
+            
+                child.stderr.on('data', function (data) {
+                    console.log('stderr: ' + data);
+                    __res += '失败';
+                });
+
+                child.on('close', function (code) {
+                  console.log('子进程已退出，退出码 ' + code);
+                  
+                  __res += '退出'+code;
+                  $('#content').html(__res);
+                  // cb && cb(__res);
+                });
+              }
+              
+              
+          }
+          theadCus();
+        </script>
   </body>
 </html>

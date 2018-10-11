@@ -1,23 +1,55 @@
 {
   "name": "xtoken2.0",
   "version": "1.0.0",
-  "description": "",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "dev": "node ./api/index.js",
-    "packager": "electron-packager ../Xtoken2.0 --all --out ./xtoken --electron-version 1.0.0 --overwrite "
+    "build": "electron-builder"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "bip39": "^2.5.0",
-    "bitcoinjs-lib": "^3.3.2",
-    "ethereumjs-util": "^6.0.0",
-    "ethereumjs-wallet": "^0.6.2"
+  "build": {
+    "productName": "xtoken2.0",
+    "appId": "com.heleen.app",
+    "directories": {
+      "output": "build"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "mac": {
+      "icon": "build/icons/icon.icns"
+    },
+    "win": {
+      "icon": "build/icons/icon.ico"
+    },
+    "linux": {
+      "icon": "build/icons"
+    }
   },
-  "devDependencies": {
-    "electron": "^3.0.3"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Un3635/electron-project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Un3635/electron-project/issues"
+  },
+  "homepage": "https://github.com/Un3635/electron-project#readme",
+  "description": "",
+  "dependencies": {
+    "bitcoinjs-lib": "^3.3.2"
   }
 }

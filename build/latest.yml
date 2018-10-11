@@ -1,0 +1,8 @@
+version: 1.0.0
+files:
+  - url: xtoken2.0-setup-1.0.0.exe
+    sha512: VIHItxHYKrpTNWsIrjGT9ueNUuvtBveHw5JlnWYQG9kT2yFlOaPfbbqDiFyfNbsBC45bC3eoYY7mq2GNLpd50Q==
+    size: 38116219
+path: xtoken2.0-setup-1.0.0.exe
+sha512: VIHItxHYKrpTNWsIrjGT9ueNUuvtBveHw5JlnWYQG9kT2yFlOaPfbbqDiFyfNbsBC45bC3eoYY7mq2GNLpd50Q==
+releaseDate: '2018-10-11T10:35:11.438Z'
