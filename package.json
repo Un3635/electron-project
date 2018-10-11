@@ -5,7 +5,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "build": "electron-builder"
+     "pack": "electron-builder --dir",
+    "build": "electron-builder",
+    "build:mac": "electron-builder  -mwl=macOS --version=1.0.0",
+    "build:win": "electron-builder ../bitcoin --platform=win32 --arch=x64 --out ./bitxoin --electron-version 1.0.0 --overwrite "
   },
   "author": "",
   "license": "ISC",
@@ -31,10 +34,10 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "assets/icons/icon.icns"
     },
     "win": {
-      "icon": "build/icons/icon.ico"
+      "icon": "assets/icons/icon.ico"
     },
     "linux": {
       "icon": "build/icons"

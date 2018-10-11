@@ -13,9 +13,9 @@ dmg:
       'y': 150
       type: file
 mac:
-  icon: build/icons/icon.icns
+  icon: assets/icons/icon.icns
 win:
-  icon: build/icons/icon.ico
+  icon: assets/icons/icon.ico
 linux:
   icon: build/icons
 electronVersion: 3.0.4
