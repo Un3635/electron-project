@@ -124,6 +124,9 @@
                 
                 this.listData = o;
                 this.lastCircle();
+            }, (count) => {
+              // 用户进度条
+               this.percent = Math.floor(count / this.num * 100);
             });
           // if(this.coin === 'BTC') {
           //   // this.getMnemonicBtc(res);
@@ -231,7 +234,7 @@
               var arr = this.listData[this.coin][this.listData[this.coin].length-1];
               this.listData[this.coin][this.listData[this.coin].length-1] = Object.assign(arr, res.data.result[this.coin][0])
             }
-            this.percent = Math.floor(this.listData[this.coin].length / this.num * 100);
+           
            
           }
         ).then(() => {

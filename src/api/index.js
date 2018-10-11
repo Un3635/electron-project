@@ -6,7 +6,7 @@ const bitcoinOp = require('./bitcoin');
 let arr = [], count = 0;
 
 
-const theadCus = (circle = 1, coin = 'BTC', cb) => {
+const theadCus = (circle = 1, coin = 'BTC', cb, cb2) => {
   const __path = path.join(__dirname, 'api.js');
   const circleC = 1;
   // const __path = path.join(__dirname, 'test.js');
@@ -33,6 +33,9 @@ const theadCus = (circle = 1, coin = 'BTC', cb) => {
     child.stdout.setEncoding('utf8');
     child.stdout.on('data', function (data) {
       console.log('stdout: ' + data);
+      if(data.slice(0, 1) !== '{') {
+        cb2 && cb2(data);
+      }
       arr.push(data+'');
      });
  
@@ -46,7 +49,8 @@ const theadCus = (circle = 1, coin = 'BTC', cb) => {
       console.log('子进程已退出，退出码 ' + code);
       // __res += '退出'+code+__path;
       // __res += __path;
-      //  cb && cb(arr);
+      
+      
       if(count === circleC) {
         cb && cb(arr);
       }

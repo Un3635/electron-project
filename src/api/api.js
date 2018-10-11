@@ -29,6 +29,7 @@ const generate = (coin__, __coin = 'BTC', __start = 0, __end = 10) => {
       (function(i){
         return function() {
           coin__[__coin].push(bitcoinOp[__coin](i));
+          console.log(i);
         }()
       })(i)
     }
@@ -47,6 +48,7 @@ const generateETH = (__coin = 'ETH', __start = 0, __end = 10) => {
   for(var i = __start; i < __end; i++) {
     (function(i){
       return function() {
+        console.log(i);
         coin__[__coin].push(Object.assign(getMnemonic(__coin), bitcoinOp[__coin](0)));
         // coin__.push();
       }()
