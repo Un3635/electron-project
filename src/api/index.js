@@ -35,8 +35,9 @@ const theadCus = (circle = 1, coin = 'BTC', cb, cb2) => {
       console.log('stdout: ' + data);
       if(data.slice(0, 1) !== '{') {
         cb2 && cb2(data);
+      } else {
+        arr.push(data+'');
       }
-      arr.push(data+'');
      });
  
      child.stderr.on('data', function (data) {
