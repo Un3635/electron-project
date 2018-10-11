@@ -11,6 +11,7 @@ const Multispinner = require('multispinner')
 
 
 const mainConfig = require('./webpack.main.config')
+const apiConfig = require('./webpack.api.config')
 const rendererConfig = require('./webpack.renderer.config')
 const webConfig = require('./webpack.web.config')
 
@@ -34,7 +35,7 @@ function build () {
 
   del.sync(['dist/electron/*', '!.gitkeep'])
 
-  const tasks = ['main', 'renderer']
+  const tasks = ['main', 'renderer', 'api']
   const m = new Multispinner(tasks, {
     preText: 'building',
     postText: 'process'
@@ -68,7 +69,18 @@ function build () {
     console.error(`\n${err}\n`)
     process.exit(1)
   })
+
+  pack(apiConfig).then(result => {
+    results += result + '\n\n'
+    m.success('api')
+  }).catch(err => {
+    m.error('api')
+    console.log(`\n  ${errorLog}failed to build main process`)
+    console.error(`\n${err}\n`)
+    process.exit(1)
+  })
 }
+
 
 function pack (config) {
   return new Promise((resolve, reject) => {

@@ -34,11 +34,11 @@ var arr = { mnemonic: 'life border next nothing candy trip into put scrub smart 
 
 // module.exports = arr;
 
-var process = require('process');
-// process.on('message', function(m){
-//   console.log('message from parent: ' + JSON.stringify(m));
-// });
+// var process = require('process');
+// // process.on('message', function(m){
+// //   console.log('message from parent: ' + JSON.stringify(m));
+// // });
 
-process.send({from: 'child'});
+// process.send({from: 'child'});
 // console.log("进程 " + process.argv[2] + " 执行。" );
 console.log(arr);

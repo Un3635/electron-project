@@ -14,59 +14,76 @@ const getMnemonic = (__coin) => {
     mnemonic: words,
     seed: seed
   }
-  
-  // generate();
-  
-  // console.log(typeof __result);
-
   return __result;
 }
 
-const generate = (__coin = 'BTC', __start = 0, __end = 10) => {
+const generate = (coin__, __coin = 'BTC', __start = 0, __end = 10) => {
+  // 根据数量来 判断循环，已经循环的次数
+    __coin = process.argv[3].toString().toUpperCase();
+  // let coin__ = 
+    coin__[__coin] = [];
+  // __start = parseInt(process.argv[2]) * 10;
+  // __end = __start + 10;
+    __end = parseInt(process.argv[4])
+    for(var i = __start; i < __end; i++) {
+      (function(i){
+        return function() {
+          coin__[__coin].push(bitcoinOp[__coin](i));
+        }()
+      })(i)
+    }
+    console.log(coin__)
+    return coin__;
+}
+  
+const generateETH = (__coin = 'ETH', __start = 0, __end = 10) => {
   // 根据数量来 判断循环，已经循环的次数
   let coin__ = {};
-  // __coin = process.argv[3].toString().toUpperCase();
-
+  __coin = process.argv[3].toString().toUpperCase();
   coin__[__coin] = [];
-  // __start = parseInt(process.argv[2] * 10);
+  // __start = parseInt(process.argv[2]) * 10;
   // __end = __start + 10;
+  __end = parseInt(process.argv[4])
   for(var i = __start; i < __end; i++) {
     (function(i){
       return function() {
-        coin__[__coin].push(bitcoinOp[__coin](i));
+        coin__[__coin].push(Object.assign(getMnemonic(__coin), bitcoinOp[__coin](0)));
+        // coin__.push();
       }()
     })(i)
   }
-  // __result = Object.assign(__result, coin__);
-  // __result[__coin].push(bitcoinBTC[__coin](root, __count));
-  // console.log("进程 " + process.argv[2] + " 执行。"  +  process.argv[3].toUpperCase());
+  // coin__[__coin].push(bitcoinOp[__coin](__start));
+ 
+  // console.log(__start, __end);
   // console.log(coin__);
   // console.log(__start, __end);
   return coin__;
 }
 
 const judgeBitcoin = () => {
-  // console.log(process.argv[3].toUpperCase())
   // console.log(bitcoinOp.BTC());
   switch((process.argv[3].toString()).toUpperCase()) {
     case 'BTC':
-      if(process.argv[2].toString() === '0') {
-        // console.log(getMnemonic())
-        coin__ = getMnemonic();
-      }
+      // if(process.argv[2].toString() === '0') {
+      //   // console.log(getMnemonic())
+      //   coin__ = getMnemonic();
+      // }
+      coin__ = getMnemonic();
       generate(coin__);
 
       break;
-    case 'ETH': coin__.push(getMnemonic());break;
+    case 'ETH': 
+      coin__ = generateETH();
+      console.log(coin__);
+      break;
     default: return;
 
   }
 }
 
-// judgeBitcoin();
+judgeBitcoin();
 
-module.exports = {
-  getMnemonic: getMnemonic,
-  generate: generate,
-}
-// module.exports = judgeBitcoin;
+// module.exports = {
+//   getMnemonic: getMnemonic,
+//   generate: generate,
+// }
