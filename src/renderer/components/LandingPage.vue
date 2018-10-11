@@ -29,17 +29,17 @@
   </div>
 </template>
 <script>
-  import theadCus from '../../api/index.js';
+  // import theadCus from '../../api/index.js';
   // import APIS from '../../api/api.js';
-
+  import ipcRenderer from 'electron';
   import saveAs from '../../../static/fileSaver.js';
-
+  var ipc = ipcRenderer.ipcRenderer;
   export default {
     name: 'landing-page',
     components: {  },
      data () {
       return {
-        num: 1,
+        num: 11,
         coin: 'BTC',
         spinShow: false,
         opShow: false,
@@ -82,8 +82,37 @@
         this.ETHcircleCount = -99;
         this.change();
        
-        // if(T !== 'change')
+        if(T !== 'change')
           this.getMnemonic();
+          // this.num = 100;
+          // this.webw();
+      },
+      webw() {
+        var w;
+        if(typeof(Worker) !== 'undefined') {
+            w =new Worker('/src/api/webw.js');
+            var that = this;
+            this.num = '101';
+            w.onmessage = function (event) {
+               this.num = '1012';
+                // document.getElementById("result").innerHTML=event.data;
+                // var res = JSON.parse();
+                // console.log(event.data)
+                // that.fileName = that.coin+'-'+that.createDate();
+                // that.listData = res.data.result;
+                // that.$Loading.finish();
+                // that.spinShow = false;
+                that.num = event.data;
+                if(parseInt(event.data) === 50) {
+                  w.terminate();
+                 that.opShow = true;
+
+                }
+                // setTimeout(() => {
+                  
+                // }, 50)
+              };
+            }
       },
       getMnemonicEth(res) {
         // this.listD
@@ -101,12 +130,14 @@
       },
       getMnemonicBtc(res) {
 
-        this.listData = res;
+        this.listData.push(res);
         this.listData[this.coin] = [];
+        // this.lastCircle();
         // this.listData.push(res.data.result);
         this.generate();
       },
       getMnemonic(T, count) {
+       
         var reg= /^[0-9]*$/;
         if(reg.test(this.num) && this.num <= 10000) {
           if(T !== 'ETH') {
@@ -118,16 +149,24 @@
           var circleCount = Math.floor(parseInt(this.num)/parseInt(this.count));
           if(this.coin === 'BTC') {
             // this.getMnemonicBtc(res);
-             theadCus(circleCount, (res) => {
-               if(typeof  res[0] === 'string')
-                  var o = eval("(" + res[0] + ")");
-                else
-                  var o = res;
-                // console.log(o.mnemonic);
+            //  theadCus(112, (res) => {
+            //    this.num = res;
+            //   //  if(typeof  res[0] === 'string')
+            //   //     var o = eval("(" + res[0] + ")");
+            //   //   else
+            //   //     var o = res;
+            //     // console.log(o.mnemonic);
 
-                this.listData = o;
-                this.lastCircle();
-            });
+            //     // this.listData = o;
+            //     // this.lastCircle();
+            // });
+            // console.log(122);
+            ipc.send('getMnemonic');
+            ipc.on('msg', (event, arg) => {
+              console.log(arg);
+              this.getMnemonicBtc(arg);
+              // this.num = arg;
+            })
           } else if(this.coin === 'ETH') {
             if(this.ETHcircleCount === -99) this.ETHcircleCount = this.num;
             this.getMnemonicEth(res, this.ETHcircleCount);
@@ -142,27 +181,8 @@
        
       },
       generate() {
-        var w;
         var that = this;
-        // console.log(this.spinShow, this.opShow);
-        // if(typeof(Worker) !== 'undefined') {
-        //     w=new Worker('/static/start.js');
-        //     var that = this;
-        //     w.onmessage = function (event) {
-        //         // document.getElementById("result").innerHTML=event.data;
-        //         var res = JSON.parse(event.data);
-        //         // console.log(res)
-        //         that.fileName = that.coin+'-'+that.createDate();
-        //         that.listData = res.data.result;
-        //         that.$Loading.finish();
-        //         that.spinShow = false;
-        //         w.terminate();
-        //         that.opShow = true;
-        //         // setTimeout(() => {
-                  
-        //         // }, 50)
-        //       };
-        //     }
+       
         var circleCount = Math.floor(parseInt(this.num)/parseInt(this.count));
         var lastCount = this.num%this.count;
         var total = circleCount;
@@ -193,22 +213,29 @@
         }
 
         this.$nextTick(() => {
-          jude();
+          // jude();
+          this.getAddress(0,this.num, () => {
+            this.lastCircle();
+          });
         })
         
       },
       getAddress(sc, ec, cb) {
-        var res = APIS.generate(this.coin, sc, ec);
+        // var res = APIS.generate(this.coin, sc, ec);
+         ipc.send('getAddress', this.coin, sc, ec);
+         ipc.on('msgAddress', (ev, res) => {
+           if( this.coin === 'BTC') {
+              this.listData[this.coin] = this.listData[this.coin].concat(res[this.coin]);
+            } else {
+              var arr = this.listData[this.coin][this.listData[this.coin].length-1];
+              this.listData[this.coin][this.listData[this.coin].length-1] = Object.assign(arr, res[this.coin][0])
+            }
+            this.percent = Math.floor(this.listData[this.coin].length / this.num * 100);
+            // console.log(this.percent)
+            cb && cb();
+         })
         // console.log(res);
-        if( this.coin === 'BTC') {
-          this.listData[this.coin] = this.listData[this.coin].concat(res[this.coin]);
-        } else {
-          var arr = this.listData[this.coin][this.listData[this.coin].length-1];
-          this.listData[this.coin][this.listData[this.coin].length-1] = Object.assign(arr, res[this.coin][0])
-        }
-        this.percent = Math.floor(this.listData[this.coin].length / this.num * 100);
-        // console.log(this.percent)
-        cb && cb();
+        
       },
       doLoad() {
         // var mes = '助记词: ' + this.listData.mnemonic + '\r\n';
@@ -231,7 +258,7 @@
         var _addr = this.coin === 'BTC' ? "" : "m/44'/60'/0'/0/";
         
         if(this.coin === 'BTC') {
-          mes += '<tr><td style="text-align: center; border: 1px solid #f1f1f3">/</td><td style="border: 1px solid #f1f1f3">助记词</td><td style="border: 1px solid #f1f1f3">'+this.listData.mnemonic +'</td></tr>';
+          mes += '<tr><td style="text-align: center; border: 1px solid #f1f1f3">/</td><td style="border: 1px solid #f1f1f3">助记词</td><td style="border: 1px solid #f1f1f3">'+this.listData[0].mnemonic +'</td></tr>';
         }
         for(var i in __data) {
           if(this.coin === 'ETH') {
@@ -249,7 +276,7 @@
         }
         mes+='</table>';
         var blob = new Blob([mes], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"}, function() {
-          console.log(12);
+          // console.log(12);
         });
         
         saveAs(blob, this.fileName + ".xls");

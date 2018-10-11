@@ -22,14 +22,14 @@ const getMnemonic = (__coin) => {
   return __result;
 }
 
-const generate = ( coin__, __coin = 'BTC', __start = 0, __end = 10) => {
+const generate = (__coin = 'BTC', __start = 0, __end = 10) => {
   // 根据数量来 判断循环，已经循环的次数
-  // let coin__ = {};
-  __coin = process.argv[3].toString().toUpperCase();
+  let coin__ = {};
+  // __coin = process.argv[3].toString().toUpperCase();
 
   coin__[__coin] = [];
-  __start = parseInt(process.argv[2] * 10);
-  __end = __start + 10;
+  // __start = parseInt(process.argv[2] * 10);
+  // __end = __start + 10;
   for(var i = __start; i < __end; i++) {
     (function(i){
       return function() {
@@ -40,13 +40,14 @@ const generate = ( coin__, __coin = 'BTC', __start = 0, __end = 10) => {
   // __result = Object.assign(__result, coin__);
   // __result[__coin].push(bitcoinBTC[__coin](root, __count));
   // console.log("进程 " + process.argv[2] + " 执行。"  +  process.argv[3].toUpperCase());
-  console.log(coin__);
+  // console.log(coin__);
   // console.log(__start, __end);
   return coin__;
 }
 
 const judgeBitcoin = () => {
   // console.log(process.argv[3].toUpperCase())
+  // console.log(bitcoinOp.BTC());
   switch((process.argv[3].toString()).toUpperCase()) {
     case 'BTC':
       if(process.argv[2].toString() === '0') {
@@ -62,11 +63,10 @@ const judgeBitcoin = () => {
   }
 }
 
-judgeBitcoin();
-// module.exports = {
-//   getMnemonic: getMnemonic,
-//   generate: generate,
-// }
-// module.exports = {
-//   test: test
-// }
+// judgeBitcoin();
+
+module.exports = {
+  getMnemonic: getMnemonic,
+  generate: generate,
+}
+// module.exports = judgeBitcoin;

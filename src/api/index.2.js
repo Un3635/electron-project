@@ -94,19 +94,25 @@ console.log(cluster.isMaster);
 //   // quit: quit 
 // };
 
-if (cluster.isMaster) {
-  // 循环 fork 任务 CPU i5-7300HQ 四核四进程
-  for (let i = 0; i < 6; i++) {
-    // cluster.fork()
+
+const theadCus = () => {
+  if (cluster.isMaster) {
+    // 循环 fork 任务 CPU i5-7300HQ 四核四进程
+    for (let i = 0; i < 6; i++) {
+      cluster.fork()
+    }
+    var i=6;
+    cluster.on('exit', function(worker, code, signal) {
+      if(!--i){
+        console.timeEnd('8 cluster');
+        process.exit(0);
+      }
+    });
+  } else {
+    console.log(fibo (40));
+    process.exit(0);
   }
-  var i=6;
-  cluster.on('exit', function(worker, code, signal) {
-		if(!--i){
-			console.timeEnd('8 cluster');
-			process.exit(0);
-		}
-  });
-} else {
-  console.log(fibo (40));
-  process.exit(0);
 }
+
+export default theadCus;
+// theadCus();

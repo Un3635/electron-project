@@ -1,10 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 
 // import theadCus from '../api/index.js';
-// import APIS from '../api/api.js'
-import bip39 from 'bip39'
-import Btc from 'bitcoinjs-lib';;
-
+// import APIS from '../api/api'
 
 // import hh from '../api/index.js';
 /**
@@ -72,75 +69,23 @@ ipcMain.on('window-closed', (ev, arg) => {
   mainWindow = null;
 })
 
+// 
+// ipcMain.on('getMnemonic', (ev, arg) => {
+//   // theadCus();
+//   // hh();
+//   mainWindow.webContents.send('msg',APIS.getMnemonic()); //发送消息给渲染进程 
 
+// })
 
-//
-
-
-let root;
-
-ipcMain.on('getMnemonic', (ev, arg) => {
-  // theadCus();
-  // hh();
- let words = bip39.generateMnemonic(128);
- let seed = bip39.mnemonicToSeed(words); // , 'bitcoin'
-  let seedAsHex = seed.toString('hex');
-  root = Btc.HDNode.fromSeedHex(seedAsHex);
- console.log(words)
-  mainWindow.webContents.send('msg',words); //发送消息给渲染进程 
-
-})
-
-const derivePathBTC = (index) => {
-  let key = root.derivePath("m/44'/0'/0'/0/" + index); // 
-  return {
-    prv: key.keyPair.toWIF(),
-    address: key.getAddress(),
-    pub: key.keyPair.getPublicKeyBuffer().toString('hex')
-  }
-  // let key = hdWallet.derivePath("m/44'/0'/0'/0/" + index);
-  // console.log(key._hdkey._privateKey, index);
-  // return {
-  //   prv: util.bufferToHex(key._hdkey._privateKey),
-  //   address: util.bufferToHex(util.pubToAddress(key._hdkey._publicKey, true)),
-  //   pub: util.bufferToHex(key._hdkey._publicKey)
-  // }
-}
-
-const generate = (__coin = 'BTC', __start = 0, __end = 10) => {
-  // 根据数量来 判断循环，已经循环的次数
-  let coin__ = {};
-  // __coin = process.argv[3].toString().toUpperCase();
-
-  coin__[__coin] = [];
-  // __start = parseInt(process.argv[2] * 10);
-  // __end = __start + 10;
-  for(var i = __start; i < __end; i++) {
-    (function(i){
-      return function() {
-        coin__[__coin].push(derivePathBTC(i));
-      }()
-    })(i)
-  }
-  // __result = Object.assign(__result, coin__);
-  // __result[__coin].push(bitcoinBTC[__coin](root, __count));
-  // console.log("进程 " + process.argv[2] + " 执行。"  +  process.argv[3].toUpperCase());
-  // console.log(coin__);
-  // console.log(__start, __end);
-  return coin__;
-}
-ipcMain.on('getAddress', (ev, arg0, arg1, arg2) => {
-  // console.log(APIS.generate(arg))
-  
-  // console.log(arg0, arg1, arg2)
-  let res = generate(arg0, arg1, arg2);
-  // console.log(res);
-  mainWindow.webContents.send('msgAddress',res); //发送消息给渲染进程 
+// ipcMain.on('getAddress', (ev, arg0, arg1, arg2) => {
+//   // console.log(APIS.generate(arg))
+//   console.log(arg0, arg1, arg2)
+//   // mainWindow.webContents.send('msgAddress',APIS.generate(arg)); //发送消息给渲染进程 
   
   
-})
+// })
 
-
+// 
 ipcMain.on('theadCus', (ev, arg) => {
 // theadCus();
 // hh();
