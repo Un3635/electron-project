@@ -41,12 +41,31 @@ const mnemonicToSeed = (words, coin='BTC') => {
 
  // 生成派生 BTC key:
 const derivePathBTC = (index) => {
+  var __word, __seedAsHex, TAG = false;
+  if(!root) {
+    __word = generateMnemonic();
+    __seedAsHex = mnemonicToSeed(__word, 'BTC');
+    TAG = true;
+    
+  }
   let key = root.derivePath("m/44'/0'/0'/0/" + index ); // 
-  return {
+
+  var param = {
     prv: key.keyPair.toWIF(),
     address: key.getAddress(),
     pub: key.keyPair.getPublicKeyBuffer().toString('hex')
   }
+  if(TAG) {
+    param = Object.assign(
+      param,
+      {
+        mnemonic: __word,
+        seed: __seedAsHex
+      }
+    );
+  }
+
+  return param;
   // let key = hdWallet.derivePath("m/44'/0'/0'/0/" + index);
   // console.log(key._hdkey._privateKey, index);
   // return {

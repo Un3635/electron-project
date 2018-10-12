@@ -38,7 +38,7 @@
     components: {  },
      data () {
       return {
-        num: 50,
+        num: 10,
         coin: 'BTC',
         spinShow: false,
         opShow: false,

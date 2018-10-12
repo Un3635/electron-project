@@ -5,7 +5,7 @@ const bitcoinOp = require('./bitcoin');
 // var process = require('process');
 
 // var numCPUs  = require('os').cpus().length;
-let coin__ = [];
+let coin__ = [], TAG = false;
 
 const getMnemonic = (__coin) => {
   let words =  bitcoinOp.mnemonic();
@@ -17,23 +17,35 @@ const getMnemonic = (__coin) => {
   return __result;
 }
 
+// 生成BTC 的密钥, 地址
 const generate = (coin__, __coin = 'BTC', __start = 0, __end = 10) => {
   // 根据数量来 判断循环，已经循环的次数
     __coin = process.argv[3].toString().toUpperCase();
+    __end = parseInt(process.argv[4]);
   // let coin__ = 
     coin__[__coin] = [];
-  // __start = parseInt(process.argv[2]) * 10;
-  // __end = __start + 10;
-    __end = parseInt(process.argv[4])
+    __start = parseInt(process.argv[2]) * 5;
+    __end = __start + __end;
+   
+    // console.log(__start, __end)
     for(var i = __start; i < __end; i++) {
       (function(i){
         return function() {
-          coin__[__coin].push(bitcoinOp[__coin](i));
-          console.log(i);
+          var param = bitcoinOp[__coin](i);
+          // if(param.word) {
+          //   coin__ = param.word;
+          // }  
+          // coin__[__coin].push(param);
+          // console.log(i);
+          console.log(param);
+          // setTimeout(() => {
+           
+          // },0);
+       
         }()
       })(i)
     }
-    console.log(coin__)
+    // console.log(coin__)
     return coin__;
 }
   
@@ -48,7 +60,7 @@ const generateETH = (__coin = 'ETH', __start = 0, __end = 10) => {
   for(var i = __start; i < __end; i++) {
     (function(i){
       return function() {
-        console.log(i);
+        // console.log(i);
         coin__[__coin].push(Object.assign(getMnemonic(__coin), bitcoinOp[__coin](0)));
         // coin__.push();
       }()
@@ -66,15 +78,17 @@ const judgeBitcoin = () => {
   // console.log(bitcoinOp.BTC());
   switch((process.argv[3].toString()).toUpperCase()) {
     case 'BTC':
-      // if(process.argv[2].toString() === '0') {
-      //   // console.log(getMnemonic())
-      //   coin__ = getMnemonic();
-      // }
-      coin__ = getMnemonic();
+      if(process.argv[2].toString() === '0') {
+        // console.log(getMnemonic())
+        coin__ = getMnemonic();
+        TAG = true;
+      }
+      // coin__ = getMnemonic();
       generate(coin__);
 
       break;
-    case 'ETH': 
+    case 'ETH':
+    // console.log(123)
       coin__ = generateETH();
       console.log(coin__);
       break;
