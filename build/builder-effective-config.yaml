@@ -1,8 +1,10 @@
 directories:
   output: build
   buildResources: build
-productName: xtoken2.0
-appId: com.heleen.app
+productName: xtoken
+appId: com.example.yourapp
+files:
+  - dist/electron/**/*
 dmg:
   contents:
     - x: 410
@@ -17,5 +19,5 @@ mac:
 win:
   icon: assets/icons/icon.ico
 linux:
-  icon: build/icons
-electronVersion: 3.0.4
+  icon: assets/icons
+electronVersion: 1.4.13

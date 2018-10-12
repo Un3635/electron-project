@@ -4,6 +4,12 @@ const url = require('url')
 const electron = require('electron')
 const ipc = electron.ipcMain
 
+// const path = require('path');
+// const child_process = require('child_process');
+
+// const bip39 = require('bip39');
+// const Btc = require('bitcoinjs-lib');
+// const hdkey = require('ethereumjs-wallet/hdkey')
 
   
 
@@ -34,6 +40,9 @@ function createWindow () {
     slashes: true
   }))
 
+  // if (process.env.NODE_ENV === 'development') {
+  //   mainWindow.webContents.openDevTools()
+  // }
   // 打开开发者工具。
   win.webContents.openDevTools()
 
@@ -95,6 +104,66 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+
+// let root, hdWallet;
+
+// ipcMain.on('getWord', (ev, arg) => {
+// //   let words = bip39.generateMnemonic(128);
+// //   let seed = bip39.mnemonicToSeed(words); // , 'bitcoin'
+// //   let seedAsHex = seed.toString('hex');
+// //   root = Btc.HDNode.fromSeedHex(seedAsHex);
+// //  console.log(words)
+//   mainWindow.webContents.send('word',words); //发送消息给渲染进程 
+//   var theadCus = (circle = 1, coin = 'BTC', cb, cb2) => {
+//     const __path = path.join(__dirname, 'api/api.js');
+//     const circleC = 1;
+//     // console.log(__path);
+//     arr = [];
+//     count = 0;
+//     for(var i=0; i< circleC; i++) {
+//       // if(i !== 0) TAG = 'MORE';
+//       const child = child_process.fork(__path, [i, coin, circle], {
+//         silent: true
+//       });
+//       child.stdout.setEncoding('utf8');
+//       child.stdout.on('data', function (data) {
+//         console.log('stdout: ' + data);
+//         if(data.slice(0, 1) !== '{') {
+//           cb2 && cb2(data);
+//         } else {
+//           arr.push(data+'');
+//         }
+//        });
+   
+//        child.stderr.on('data', function (data) {
+//           console.log('stderr: ' + data);
+//           // __res += '失败';
+//       });
+  
+//       child.on('close', function (code) {
+//         count++;
+//         console.log('子进程已退出，退出码 ' + code);
+//         // __res += '退出'+code+__path;
+//         // __res += __path;
+        
+        
+//         if(count === circleC) {
+//           // cb && cb(arr);
+//         }
+//       });
+//     }
+//   }
+//   theadCus();
+// })
+
+// const getMnemonicETH = () => {
+//   let words = bip39.generateMnemonic(128);
+//   let seed = bip39.mnemonicToSeed(words); // , 'bitcoin'
+
+//   hdWallet = hdkey.fromMasterSeed(seed);
+//   return words;
+// }
 
 // 在这文件，你可以续写应用剩下主进程代码。
 // 也可以拆分成几个文件，然后用 require 导入。
