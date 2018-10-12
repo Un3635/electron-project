@@ -1,42 +1,33 @@
 const path = require('path');
 const child_process = require('child_process');
 
-const bitcoinOp = require('./bitcoin');
+// const bitcoinOp = require('./');
 // var as = require('./api');
 let arr = [], count = 0;
 
 
 const theadCus = (circle = 1, coin = 'BTC', cb, cb2) => {
+// console.log(bitcoinOp.seed(bitcoinOp.mnemonic()));
+// console.log(bitcoinOp.BTC(0))
+  // cb && cb('12');
   const __path = path.join(__dirname, 'api.js');
   const circleC = 1;
-  // const __path = path.join(__dirname, 'test.js');
   // console.log(__path);
   arr = [];
   count = 0;
   for(var i=0; i< circleC; i++) {
-    // var workerProcess = child_process.spawn('node', [__path, i, 'btc']);
-    // var workerProcess = child_process.exec('node', [__path, i]);
-    // var workerProcess = child_process.fork(__path, {
-    // 	silent: false
-    // });
     // if(i !== 0) TAG = 'MORE';
     const child = child_process.fork(__path, [i, coin, circle], {
       silent: true
     });
-    //   child.on('message', function(m){
-    //     // console.log('message from child: ' + JSON.stringify(m));
-    //     __res += 'child';
-    //     // cb && cb(__res);
-    // });
-    
-    // child.send({from: 'parent'});
     child.stdout.setEncoding('utf8');
     child.stdout.on('data', function (data) {
       console.log('stdout: ' + data);
       if(data.slice(0, 1) !== '{') {
         cb2 && cb2(data);
       } else {
-        arr.push(data+'');
+        // arr.push(data+'');
+        arr = eval("(" +data+ ")")
       }
      });
  
@@ -59,6 +50,15 @@ const theadCus = (circle = 1, coin = 'BTC', cb, cb2) => {
   }
   
 }
+
+// const bitcoinOp = require('./bitcoin');
+
+// const theadCus = (circle = 1, coin = 'BTC', cb, cb2) => {
+//   console.log(bitcoinOp.seed(bitcoinOp.mnemonic()));
+//   var res = bitcoinOp.BTC(0);
+//   console.log(res)
+//     cb && cb(res.prv);
+// }
 // export default theadCus;
 module.exports = theadCus;
 // theadCus();

@@ -114,15 +114,8 @@
           }
            var circleCount = Math.floor(parseInt(this.num)/parseInt(this.count));
            theadCus(this.num, this.coin, (res) => {
-              //  this.num = ;
-              // console.log(res.substr(0, 1));
-              // console.log(typeof  res[0]);
-               if(typeof  res[0] === 'string')
-                  var o = eval("(" + res[0] + ")");
-                else
-                  var o = res;
-                
-                this.listData = o;
+                console.log(res);
+                this.listData = res;
                 this.lastCircle();
             }, (count) => {
               // 用户进度条

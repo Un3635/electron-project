@@ -13,7 +13,7 @@ const generateMnemonic = () => {
 }
 
 // 生成BTC种子
-const mnemonicToSeed = (words, coin) => {
+const mnemonicToSeed = (words, coin='BTC') => {
   let seed = bip39.mnemonicToSeed(words); // , 'bitcoin'
   let seedAsHex = seed.toString('hex');
 
@@ -41,7 +41,7 @@ const mnemonicToSeed = (words, coin) => {
 
  // 生成派生 BTC key:
 const derivePathBTC = (index) => {
-  let key = root.derivePath("m/44'/0'/0'/0/" + index); // 
+  let key = root.derivePath("m/44'/0'/0'/0/" + index ); // 
   return {
     prv: key.keyPair.toWIF(),
     address: key.getAddress(),
@@ -73,3 +73,5 @@ module.exports = {
   BTC: derivePathBTC,
   ETH: derivePathETH
 }
+// console.log(mnemonicToSeed(generateMnemonic()));
+// console.log(derivePathBTC(0))
