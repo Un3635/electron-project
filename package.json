@@ -7,7 +7,8 @@
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
-    "build:darwin": "node .electron-vue/build.js && electron-builder --platform=darwin --arch=ia32",
+    "build:test": "node .electron-vue/build.js && electron-builder -mwl",
+    "build:darwin": "node .electron-vue/build.js && electron-builder --macos",
     "build:dir": "node .electron-vue/build.js && electron-builder --dir",
     "build:clean": "cross-env BUILD_TARGET=clean node .electron-vue/build.js",
     "build:web": "cross-env BUILD_TARGET=web node .electron-vue/build.js",
@@ -15,7 +16,9 @@
     "pack": "npm run pack:main && npm run pack:renderer",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
-    "postinstall": ""
+    "postinstall": "install-app-deps",
+    "win":"node .electron-vue/build.js && electron-packager ./ xtoken2.0 --platform=win32 --arch=x64 --icon=./build/icons/icon.icns --overwrite  --electron-version=1.0.0",
+    "mac":"node .electron-vue/build.js && electron-packager ./ xtoken2.0 --platform=darwin --arch=x64 --icon=./build/icons/icon.icns --overwrite  --electron-version=1.0.0"
   },
   "build": {
     "productName": "xtoken",
@@ -42,6 +45,7 @@
       ]
     },
     "mac": {
+      "target": "dmg",
       "icon": "build/icons/icon.icns"
     },
     "win": {

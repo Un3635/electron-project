@@ -84,27 +84,6 @@
         if(T !== 'change')
           this.getMnemonic();
       },
-      getMnemonicEth(res) {
-        // this.listD
-        this.listData[this.coin].push(res);
-       
-        // this.listData[this.coin] = [];
-        this.getAddress(0, 1, () => {
-          this.ETHcircleCount--;
-          if(this.ETHcircleCount>0) {
-            this.getMnemonic(this.coin, this.ETHcircleCount);
-          } else {
-            this.lastCircle();
-          }
-        });
-      },
-      getMnemonicBtc(res) {
-
-        this.listData = res;
-        this.listData[this.coin] = [];
-        // this.listData.push(res.data.result);
-        this.generate();
-      },
       getMnemonic(T, count) {
         var reg= /^[0-9]*$/;
         if(reg.test(this.num) && this.num <= 10000) {
@@ -112,46 +91,16 @@
             this.$Loading.start();
             this.spinShow = true;
           }
+
            var circleCount = Math.floor(parseInt(this.num)/parseInt(this.count));
            theadCus(this.num, this.coin, (res) => {
-                console.log(res);
                 this.listData = res;
+                this.percent = 100;
                 this.lastCircle();
             }, (count) => {
               // 用户进度条
                this.percent = Math.floor(count / this.num * 100);
             });
-          // if(this.coin === 'BTC') {
-          //   // this.getMnemonicBtc(res);
-          //    theadCus(this.num, this.coin, (res) => {
-          //     //  this.num = ;
-          //     // console.log(res.substr(0, 1));
-          //     console.log(typeof  res[0]);
-          //      if(typeof  res[0] === 'string')
-          //         var o = eval("(" + res[0] + ")");
-          //       else
-          //         var o = res;
-                
-          //       this.listData = o;
-          //       this.lastCircle();
-          //   });
-          //   // console.log(122);
-          //   // this.getMnemonicBtc();
-            
-          // } else if(this.coin === 'ETH') {
-          //   //   ipc.send('getETH', this.coin, 0, this.num);
-          //   //   ipc.on('msgETH', (event, arg) => {
-          //   //   console.log(arg);
-          //   //   this.listData = arg;
-          //   //   this.lastCircle();
-            
-          //   //   // this.getMnemonicBtc(arg);
-              
-          //   //   // this.num = arg;
-          //   // })
-          //   if(this.ETHcircleCount === -99) this.ETHcircleCount = this.num;
-          //   this.getMnemonicEth(this.ETHcircleCount);
-          // }
           
         } else {
           this.$Notice.error({
@@ -160,79 +109,6 @@
           });
         }
        
-      },
-      generate() {
-        var w;
-        var that = this;
-        // console.log(this.spinShow, this.opShow);
-        // if(typeof(Worker) !== 'undefined') {
-        //     w=new Worker('/static/start.js');
-        //     var that = this;
-        //     w.onmessage = function (event) {
-        //         // document.getElementById("result").innerHTML=event.data;
-        //         var res = JSON.parse(event.data);
-        //         // console.log(res)
-        //         that.fileName = that.coin+'-'+that.createDate();
-        //         that.listData = res.data.result;
-        //         that.$Loading.finish();
-        //         that.spinShow = false;
-        //         w.terminate();
-        //         that.opShow = true;
-        //         // setTimeout(() => {
-                  
-        //         // }, 50)
-        //       };
-        //     }
-        var circleCount = Math.floor(parseInt(this.num)/parseInt(this.count));
-        var lastCount = this.num%this.count;
-        var total = circleCount;
-
-        var startCount = 0, endCount = 0;
-        
-        var jude = function(){
-          if(circleCount > 0) {
-              startCount = (total - circleCount) * that.count;
-              endCount = (total - circleCount + 1) * that.count;
-              that.getAddress(startCount, endCount, function(){
-                if(circleCount > 0) circleCount--;
-                jude();
-              });
-              
-          } else if(lastCount !==0) {
-            
-              that.getAddress(endCount, endCount + lastCount, function() {
-                circleCount = 0;
-                lastCount = 0;
-                jude();
-              });
-              
-          } else {
-            that.lastCircle();
-          }
-            
-        }
-
-        this.$nextTick(() => {
-          jude();
-        })
-        
-      },
-      getAddress(sc, ec, cb) {
-         APIS.generate(this.coin, sc, ec).then(
-          (res) => {
-            
-            if( this.coin === 'BTC') {
-              this.listData[this.coin] = this.listData[this.coin].concat(res.data.result[this.coin]);
-            } else {
-              var arr = this.listData[this.coin][this.listData[this.coin].length-1];
-              this.listData[this.coin][this.listData[this.coin].length-1] = Object.assign(arr, res.data.result[this.coin][0])
-            }
-           
-           
-          }
-        ).then(() => {
-          cb && cb();
-        })
       },
       doLoad() {
         // var mes = '助记词: ' + this.listData.mnemonic + '\r\n';

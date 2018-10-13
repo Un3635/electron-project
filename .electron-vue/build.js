@@ -24,6 +24,8 @@ if (process.env.BUILD_TARGET === 'clean') clean()
 else if (process.env.BUILD_TARGET === 'web') web()
 else build()
 
+
+
 function clean () {
   del.sync(['build/*', '!build/icons', '!build/icons/icon.*'])
   console.log(`\n${doneLog}\n`)
@@ -60,6 +62,7 @@ function build () {
     process.exit(1)
   })
 
+  
   pack(rendererConfig).then(result => {
     results += result + '\n\n'
     m.success('renderer')

@@ -30,6 +30,8 @@ function createWindow () {
   })
 
   mainWindow.loadURL(winURL)
+  // 打开开发者工具。
+  mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', () => {
     mainWindow = null
