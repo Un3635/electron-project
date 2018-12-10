@@ -1,0 +1,15 @@
+{
+  "name": "xiaochongkk",
+  "version": "2.0.0",
+  "main": "main.js",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "electron-packager": "^12.1.0",
+    "superagent": "^3.8.3"
+  },
+  "scripts": {
+    "test": "start",
+    "start": "electron .",
+    "packager": "electron-packager ../xiaochongkk --all --out ./kkapp --electron-version 2.0.0 --overwrite "
+  }
+}

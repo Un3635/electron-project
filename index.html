@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Coffee Time</title>
+    <link rel="stylesheet" href="plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style/common/common.css" media="all">
+  </head>
+  <style type="text/css">
+   .navigation{background:#FFFFFF; width:auto; height:160px; padding:0px 40px;}
+   .navigation ul{padding:30px 0px;}
+   .navigation ul li{width:100px; height:100px;float: left; margin-left: 25px;}
+   .navigation ul li:first{margin-left:0px;}
+   .navigation ul li .show-function{width:80%; height:80%; border-radius: 50%; border: 1px inset  rgba(0,0,0,0.2);opacity:0.5; margin-left:10%; cursor: pointer;}
+   .navigation ul li .show-function:hover{opacity:0.7;}
+   .navigation ul li .show-function i{font-size: 40px; line-height: 80px; color: rgba(255, 255, 255, 0.8);}
+   .navigation ul li .show-title{text-align:center; color: #222222; line-height:30px; font-size: 14px;}
+
+   .logo-title{height:190px; line-height:60px; color:#FFF; font-size:28px;}
+   .logo-title span{font-size: 12px; color: #E6E6E6;}
+  
+   .window-info{height:20px;line-height:20px;padding:0px 30px;text-align: left;background:#FFF;}
+
+  </style>
+
+   <script src="plugins/layui/layui.js"></script>
+   <script src="plugins/widgets/canvas-particle.js"></script>
+   <script src="plugins/jquery-3.3.1.min.js"></script>
+   <script src="script/common/common.js"></script>
+   <script src="script/common/common-os.js"></script>
+   <script src="script/index.js"></script>
+
+  <body>
+      <div class="base-container">
+          <div class="base-wrapper">
+            <section style="-webkit-app-region: drag">
+            <div class="base-banner" >
+                <div class="logo nico-left nico-overflow" style="width:300px">
+                  <i class="layui-icon layui-icon-component"></i> <font style="font-size:13px"> 小虫快看</font>
+                </div>
+                <div class="operation nico-right" style="-webkit-app-region: no-drag">
+                  <i class="layui-icon layui-icon-down right-10 nico-pointer" id="minbt"></i>
+                  <i class="layui-icon layui-icon-fire right-10 nico-pointer" onclick="resizeWindow()"></i>
+                  <i class="layui-icon layui-icon-close nico-pointer" onclick="window.close()"></i>
+                </div>
+            </div>
+            </section>
+          </div>
+
+
+      </div>
+      <div class="base-container" id="mydiv">
+        <div class="base-wrapper" style="text-align:center">
+          <img src="images/logo.png" style="height:210px;margin-top:90px;"/>
+        </div>
+        <div class="base-wrapper" style="text-align:center">
+          <div class="logo-title">小虫快看<span>@2018</span></div>
+        </div>
+      </div>
+
+      <div class="base-container">
+        <div class="base-wrapper" style="text-align:center">
+          <div class="navigation">
+              <ul style="float:left">
+                <a href="page/divination/index.html">
+                  <li>
+                    <div class="show-function" style="background:#66cc99;">
+                      <i class="layui-icon layui-icon-rate"></i> 
+                    </div>
+                    <div class="show-title">小虫占卜</div>
+                  </li>
+                </a>
+                <a href="page/quickq/index.html">
+                  <li>
+                    <div class="show-function" style="background:#FFD700;">
+                      <i class="layui-icon layui-icon-dialogue"></i>
+                    </div>
+                    <div class="show-title">小虫快问</div>
+                  </li>
+                </a>
+                <li>
+                  <div class="show-function" style="background:#33ccff;">
+                    <i class="layui-icon layui-icon-dialogue"></i>
+                  </div>
+                  <div class="show-title">小虫快修</div>
+                </li>
+              </ul>
+
+              <ul style="float:right">
+                <li>
+                  <div class="show-function" style="background:#ff6600;">
+                    <i class="layui-icon layui-icon-layer"></i>
+                  </div>
+                  <div class="show-title">小虫快讯</div>
+                </li>
+                <a href="page/live/index.html">
+                  <li>
+                    <div class="show-function" style="background:#996600;">
+                      <i class="layui-icon layui-icon-radio"></i>
+                    </div>
+                    <div class="show-title">小虫直播</div>
+                  </li>
+                </a>
+                <li style="margin-right:25px">
+                  <div class="show-function" style="background:#BA55D3;">
+                    <i class="layui-icon layui-icon-tree"></i> 
+                  </div>
+                  <div class="show-title">小虫云</div>
+                </li>
+              </ul>
+          </div>
+          <pre class="window-info font-style-black" id="computerInfo">
+            
+          </pre>
+        </div>
+      </div>
+  </body>
+</html>

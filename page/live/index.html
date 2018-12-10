@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Coffee Time</title>
+    <link rel="stylesheet" href="../../plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../style/common/common.css" media="all">
+    
+  </head>
+  <style type="text/css">
+  
+    html { overflow-x: hidden; overflow-y: hidden; }
+    .image-wrapper{text-align:center; padding:5px 0;}
+    .image-wrapper img{margin-top: 0px;}
+
+    .row-wrapper{width:600px; line-height: 36px; margin:0 auto;  overflow: hidden; font-size:15px;}
+
+    .font-wrapper{text-align: center; font-size: 26px; margin:0 5px; color:#fff;}
+
+    .row-wrapper{margin-top:10px;}
+
+    .layui-col-xs10{color: #fff; font-size: 14px;}
+
+    .cur-div div{background: none !important;}
+
+    .layui-carousel-ind{display:none;}
+
+    .element::-webkit-scrollbar {display:none}
+  </style>
+
+   <script src="../../plugins/layui/layui.js"></script>
+   <script src="../../plugins/jquery-3.3.1.min.js"></script>
+   <script src="../../script/common/common.js"></script>
+
+  <body >
+      <div class="base-container">
+          <div class="base-wrapper">
+            <section style="-webkit-app-region: drag">
+            <div class="base-banner" >
+                <a href="../../index.html" class="font-style-white">
+                  <div class="logo nico-left nico-overflow" style="width:auto;-webkit-app-region: no-drag">
+                   <i class="layui-icon layui-icon-component"></i> <font style="font-size:13px"> 小虫快看</font>
+                  </div>
+                </a>
+                <div class="operation nico-right" style="-webkit-app-region: no-drag">
+                  <i class="layui-icon layui-icon-down right-10 nico-pointer" id="minbt"></i>
+                  <i class="layui-icon layui-icon-fire right-10 nico-pointer" onclick="resizeWindow()"></i>
+                  <i class="layui-icon layui-icon-close nico-pointer" onclick="window.close()"></i>
+                </div>
+            </div>
+            </section>
+          </div>
+      </div>
+
+     <!--  <div class="base-container">
+          <div class="base-wrapper" style="text-align:center">
+             <a class="layui-btn" style="width:300px;margin-top:200px;background:#669966">开始沟通</a>
+          </div>
+      </div> -->
+
+      <webview src="http://live.ikuvn.com:1024/images/video/index.html" plugins style="width:1000px; height:668px"></webview>
+  </body>
+</html>

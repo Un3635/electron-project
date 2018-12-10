@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Coffee Time</title>
+    <link rel="stylesheet" href="../../plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../style/common/common.css" media="all">
+  </head>
+  <style type="text/css">
+  
+    
+    .image-wrapper{text-align:center; padding:5px 0;}
+    .image-wrapper img{margin-top: 25px;}
+
+    .row-wrapper{width:600px; line-height: 36px; margin:0 auto;  overflow: hidden; font-size:15px;}
+
+    .font-wrapper{text-align: center; font-size: 26px; margin:10px 5px; color:#fff;}
+
+    .row-wrapper{margin-top:10px;}
+
+    .layui-col-xs10{color: #fff; font-size: 14px;}
+
+    .cur-div div{background: none !important;}
+
+    .layui-carousel-ind{display:none;}
+  </style>
+
+   <script src="../../plugins/layui/layui.js"></script>
+   <script src="../../plugins/jquery-3.3.1.min.js"></script>
+   <script src="../../script/common/common.js"></script>
+   <script src="../../script/divination/index.js"></script>
+   <script src="../../script/divination/crawler.js"></script>
+
+  <body >
+      <div class="base-container">
+          <div class="base-wrapper">
+            <section style="-webkit-app-region: drag">
+            <div class="base-banner" >
+                <a href="../../index.html" class="font-style-white">
+                  <div class="logo nico-left nico-overflow" style="width:auto;-webkit-app-region: no-drag">
+                   <i class="layui-icon layui-icon-component"></i> <font style="font-size:13px"> 小虫快看</font>
+                  </div>
+                </a>
+                <div class="operation nico-right" style="-webkit-app-region: no-drag">
+                  <i class="layui-icon layui-icon-down right-10 nico-pointer" id="minbt"></i>
+                  <i class="layui-icon layui-icon-fire right-10 nico-pointer" onclick="resizeWindow()"></i>
+                  <i class="layui-icon layui-icon-close nico-pointer" onclick="window.close()"></i>
+                </div>
+            </div>
+            </section>
+          </div>
+      </div>
+      
+      <div class="base-container">
+        <div class="base-wrapper">
+          <div class="image-wrapper">
+            <div class="layui-carousel" id="images" lay-filter="images-cut" style="margin:0 auto;background:none">
+              <div class="cur-div" carousel-item="">
+                 <div data-key="11">
+                  <img src="../../images/11.png"/>
+                  <div class="font-wrapper">水瓶座</div>
+                </div>
+                <div data-key="12">
+                  <img src="../../images/12.png"/>
+                  <div class="font-wrapper">双鱼座</div>
+                </div>
+                <div data-key="1">
+                  <img src="../../images/1.png"/>
+                  <div class="font-wrapper">白羊座</div>
+                </div>
+                <div data-key="2">
+                  <img src="../../images/2.png"/>
+                  <div class="font-wrapper">金牛座</div>
+                </div>
+                <div data-key="3">
+                  <img src="../../images/3.png"/>
+                  <div class="font-wrapper">双子座</div>
+                </div>
+                <div data-key="4">
+                  <img src="../../images/4.png"/>
+                  <div class="font-wrapper">巨蟹座</div>
+                </div>
+                <div data-key="5">
+                  <img src="../../images/5.png"/>
+                  <div class="font-wrapper">狮子座</div>
+                </div>
+                <div data-key="6">
+                  <img src="../../images/6.png"/>
+                  <div class="font-wrapper">处女座</div>
+                </div>
+                <div data-key="7">
+                  <img src="../../images/7.png"/>
+                  <div class="font-wrapper">天秤座</div>
+                </div>
+                <div data-key="8">
+                  <img src="../../images/8.png"/>
+                  <div class="font-wrapper">天蝎座</div>
+                </div>
+                <div data-key="9">
+                  <img src="../../images/9.png"/>
+                  <div class="font-wrapper">射手座</div>
+                </div>
+                <div data-key="10">
+                  <img src="../../images/10.png"/>
+                  <div class="font-wrapper">摩羯座</div>
+                </div>
+              </div>
+            </div> 
+            
+          </div>
+          
+          <div class="layui-row">
+            <div class="row-wrapper">
+              <div class="layui-col-xs2">
+                <div class="layui-btn" style="margin-right:1px;background:#FFB800">综合运势</div>
+              </div>
+              <div class="layui-col-xs10" id="p1">
+              </div>
+            </div>
+
+            <div class="row-wrapper">
+              <div class="layui-col-xs2">
+                <div class="layui-btn" style="margin-right:1px;background:#ea749e">爱情运势</div>
+              </div>
+              <div class="layui-col-xs10" id="p2">
+              </div>
+            </div>
+
+            <div class="row-wrapper">
+              <div class="layui-col-xs2">
+                <div class="layui-btn" style="margin-right:1px;background:#ab92dc">事业学业</div>
+              </div>
+              <div class="layui-col-xs10" id="p3">
+              </div>
+            </div>
+
+            <div class="row-wrapper">
+              <div class="layui-col-xs2">
+                <div class="layui-btn" style="margin-right:1px;background:#f39f5b">财富运势</div>
+              </div>
+              <div class="layui-col-xs10" id="p4">
+              </div>
+            </div>
+
+            <div class="row-wrapper">
+              <div class="layui-col-xs2">
+                <div class="layui-btn" style="margin-right:1px;background:#7fbe58">健康运势</div>
+              </div>
+              <div class="layui-col-xs10" id="p5">
+              </div>
+            </div>
+
+            <div class="row-wrapper">
+              <div class="layui-col-xs2">
+                <div class="layui-btn" style="margin-right:1px;background:#dd7e6b">&nbsp;&nbsp;&nbsp;&nbsp;TIP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+              </div>
+              <div class="layui-col-xs10" id="p5">
+                宜写代码，忌bug。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </body>
+</html>

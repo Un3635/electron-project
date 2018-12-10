@@ -1,0 +1,109 @@
+ body{background:#4b8fcc;}
+.base-container{
+	width: 100%;
+}
+
+.base-banner{
+	line-height:30px;
+	height: 30px;
+	padding:0px 8px;
+	overflow:hidden;
+	color:#FFF;
+	font-size:15px;
+
+}
+
+.base-container .base-wrapper{
+	width: auto;
+	margin: 0px auto;
+	height: auto;
+	/*background: #FF3333;*/
+}
+
+.base-container .base-box{
+	width: 400px;
+	margin: 0px auto;
+	height: auto;
+}
+
+.base-line{
+	width: 100%;
+	height: auto;
+}
+
+.nico-right{
+	float: right;
+}
+
+.nico-left{
+	float: left;
+}
+
+.nico-overflow{
+	overflow:hidden;
+}
+
+.top-20{
+	margin-top: 20px;
+}
+
+.right-10{
+	margin-right: 10px;
+}
+
+.nico-padding{
+	padding: 15px;
+	padding-top: 12px;
+	padding-bottom: 0px
+}
+
+.nico-no-padding{
+	padding: 0px;
+}
+
+.top-10{
+	margin-top: 10px;
+}
+
+.font-style{
+	font-size: 15px;
+	color: #3333;
+}
+
+.font-style-black{
+	font-size: 11px;
+	color: #888888;
+}
+
+.font-style-white{
+	font-size: 11px;
+	color: #FFFFFF;
+}
+
+.font-style-white:hover{color: #EEEEEE;}
+
+.nico-ul{
+	width: auto;
+	padding: 10px;
+	overflow: hidden;
+}
+
+.nico-ul li{
+	width: auto;
+	line-height: 30px;
+	color: #333333;
+	margin-top: 5px;
+	padding: 5px 5px;
+	cursor: pointer;
+}
+
+.nico-ul li:hover{
+
+	background: #EEEEEE;
+}
+
+.nico-pointer{
+	cursor: pointer;
+}
+
+.element::-webkit-scrollbar {display:none}
